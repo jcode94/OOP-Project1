@@ -33,5 +33,8 @@ public class Project1 {
 		// method calls that get 'the ball rolling', 
 		// which I think will just be working with the menu,
 		// at the most abstracted level.
+		
+		Menu mainMenu = new Menu();
+		mainMenu.displayMenu();
 	}
 } // end of program
