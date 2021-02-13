@@ -4,5 +4,5 @@ COP3330-21Spring
 
 /*
 *  Project 1
-*  Justice Smith, Taylor <lastname>
+*  Justice Smith, Taylor Andrew
 */
