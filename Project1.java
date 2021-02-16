@@ -1,40 +1,79 @@
+import java.util.*
+
 public class Project1 {
-	// This will ultimately contain the classes
-	// responsible for all the operations within the program.
 	
-	// Classes:
-	// Menu 
-	// Getting faculty information
-	// Getting student information
-	// Calculating tuition invoice
-	// Printing tuition invoice
-	// Getting staff information
-	// Printing staff information
+	public static void displayMenu() {
+		System.out.println("\t\t\tWelcome to my Personal Management Program");
+		System.out.println("1- Enter information for two students");
+		System.out.println("2- Print tuition invoice");//hellooo
+		System.out.println("3- Enter faculty member information");
+		System.out.println("4- Print faculty member information");
+		System.out.println("5- Enter staff member information");
+		System.out.println("6- Print staff member information");
+	}
+
+	public static void getFacultyInformation {
+		private // full name(string?)
+		private // id(int)
+		private // department(enum?, for math, eng or english)
+		private // rank(bool?, for prof. or adj.)
+	}
 	
-	// We can create an object from a class by 
-	// initializing an object of that type
-	// For example, because we have a Menu.java
-	// class in the same directory(package),
-	// we can just use that class here(all classes
-	// within the same package don't need importing)
+	public static void Student {
+		// Private variables are only 'visible' to the 
+		// class in which they exist. Conversely, public
+		// variables are accessible from any class
+		private // full name(string?)
+		private // id(int)
+		private // gpa(double)
+		private // number of credit hours(int)
+	}
 	
-	// So, we can do smt like 
-	// Menu mainMenu = new Menu();
-	// mainMenu.printMenu();
+	public static void generateInvoice {
 	
-	// This will create an object of the Menu class,
-	// which is in our Menu.java class file,
-	// and will instantiate one for our current file.
-	// We can then use the methods defined within the
-	// Menu class through our object.
+	}
+	
+	public static void Staff {
+		private // full name(string?)
+		private // id(int)
+		private // department(enum?, for math, eng or english)
+		private // status(bool? part-time or full-time)
+	}
 	
 	public static void main(String[] args) {
-		// This will ultimately contain the highest-level 
-		// method calls that get 'the ball rolling', 
-		// which I think will just be working with the menu,
-		// at the most abstracted level.
 		
-		Menu mainMenu = new Menu();
-		mainMenu.displayMenu();
+		int choice = 0;
+		Scanner.scnr = new Scanner(System.in);
+		
+		while (choice != 7) {
+			displayMenu();
+			choice = scnr.nextInt();
+			switch(choice) {
+				case 1:
+					// 2students info
+					break;
+				case 2:
+					generateInvoice();
+					break;
+				case 3:
+					// enter facultyInformation
+					break;
+				case 4:
+					// print facultyInformation
+					break;
+				case 5:
+					// enter staffInformation
+					break;
+				case 6:
+					// print staffInformation
+					break;
+				case 7:
+					break;
+			}		
+		}
+		
+		System.out.println("Goodbye!");
+		
+		return 0;
 	}
-} // end of program
+}
