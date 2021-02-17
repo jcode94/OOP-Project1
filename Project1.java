@@ -85,7 +85,7 @@ public class Project1 {
 					break;
 				// Invalid input choice
 				default:
-					System.out.println("Invalid choice. Please choose another.");
+					System.out.println("Invalid entry. Please try again.");
 					choice = 0;
 					break;
 		}
@@ -161,29 +161,32 @@ public class Project1 {
 		}
 	}
 
-	// FIX ME
 	public static void generateInvoice() {
 		private int idx = 0;
 		private totalCost = 0;
 		final double costPerCreditHour = 236.45; 
 		final double adminFee = 52.00;
-		
+		final double discount = 0.85;
 		
 		System.out.print("Which student? 1 " + students.get(0).getFullName() + " or 2 " + students.get(1).getFullName() + " ? "); 
+		System.out.println();
+		
 		idx = scnr.nextInt() - 1;
-		totalCost = students.get(
+		if (students.get(idx).getGPA >= 3.85)
+			totalCost = ((students.get(idx).getCreditHours() * costPerCreditHour) + adminFee) * discount;
+		else
+			totalCost = (students.get(idx).getCreditHours() * costPerCreditHour) + adminFee;
 		
-		
+		System.out.println("Here is the tuition invoice for " + students.get(idx).getFullName + " :");
+		System.out.println();
 		System.out.println("---------------------------------------------------------------------------");
 		System.out.println(students.get(idx).getFullName() + "\t" + students.get(idx).getId());
 		System.out.println("Credit Hours:" + students.get(idx).getCreditHours() + "\t" + students.get(idx).getId());
 		System.out.println("Fees: $" + adminFee);
 		System.out.println();
-		System.out.println("Total payment (after discount): $"+ );
+		System.out.println("Total payment (after discount): $"+ totalCost);
 		System.out.println("---------------------------------------------------------------------------");
 		
-		
-		//System.out.print("Here is the tuition invoice for " + students[idx].getFullName);
 	}
 
 	class Faculty {
@@ -195,7 +198,7 @@ public class Project1 {
 		// constructor
 		public Faculty(String fullName, int id, department dept, rank rank) {
 			scnr = new Scanner(System.in);
-			// String fullName, int id, enum dept, enum status
+
 			System.out.print("Name of Staff: ");
 			fullName = scnr.nextLine();
 			
@@ -205,9 +208,16 @@ public class Project1 {
 			System.out.print("Department: "); // check against enum
 			dept = scnr.next().toLowerCase();
 			
-			System.out.print("Rank: ");
-			String tempRank = next().toLowerCase();
-			for (enum rank: enum
+			System.out.print("Rank: "); // Figure out best way to input/validate enums
+			//String tempRank = next().toLowerCase();
+			//for (enum rank: enum ranks)?
+		}
+		
+		public void printFacultyInfo() {
+			System.out.println("---------------------------------------------------------------------------");
+			System.out.println(faculty.get(0).getFullName + "\t" + faculty.get(0).getId);
+			System.out.println(faculty.get(0).getDept + ", " + faculty.get(0).getRank);
+			System.out.println("---------------------------------------------------------------------------");
 		}
 		
 		// Getters
@@ -261,7 +271,7 @@ public class Project1 {
 		
 		public Staff() {
 			scnr = new Scanner(System.in);
-			// String fullName, int id, enum dept, enum status
+
 			System.out.print("Name of Staff: ");
 			fullName = scnr.nextLine();
 			
@@ -273,6 +283,13 @@ public class Project1 {
 			
 			System.out.print("Status: ");
 			status = scnr.next();
+		}
+		
+		public void printStaffInfo() {
+			System.out.println("---------------------------------------------------------------------------");
+			System.out.println(staff.get(0).getFullName + "\t" + staff.get(0).getId);
+			System.out.println(staff.get(0).getDept + ", " + staff.get(0).getStatus);
+			System.out.println("---------------------------------------------------------------------------");
 		}
 		
 		// Getters
