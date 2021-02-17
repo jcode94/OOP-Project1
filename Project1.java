@@ -20,11 +20,12 @@ public class Project1 {
 	ArrayList<Student> students = new Arraylist<Student>();
 	ArrayList<Faculty> faculty = new Arraylist<Faculty>();
 	ArrayList<Staff> staff = new Arraylist<Staff>();	
-	final int numStudents = 2;
+	
 		
 	public static int runMenu() {
 		
 		int choice = 0;
+		final int numStudents = 2;
 		Scanner scnr = new Scanner(System.in);
 		
 		System.out.println("\t\t\tWelcome to my Personal Management Program");
@@ -124,7 +125,7 @@ public class Project1 {
 		}
 		
 		// Returns id
-		public int getId() {
+		public String getId() {
 			return id;
 		}
 		
@@ -145,7 +146,7 @@ public class Project1 {
 		}
 		
 		// sets id
-		public void setId(int id) {
+		public void setId(String id) {
 			this.id = id;
 		}
 		
@@ -216,7 +217,7 @@ public class Project1 {
 		}
 		
 		// Returns id
-		public int getId() {
+		public String getId() {
 			return id;
 		}
 		
@@ -237,7 +238,7 @@ public class Project1 {
 		}
 		
 		// sets id
-		public void setId(int id) {
+		public void setId(String id) {
 			this.id = id;
 		}
 		
@@ -281,7 +282,7 @@ public class Project1 {
 		}
 		
 		// Returns id
-		public int getId() {
+		public String getId() {
 			return id;
 		}
 		
@@ -302,7 +303,7 @@ public class Project1 {
 		}
 		
 		// sets id
-		public void setId(int id) {
+		public void setId(String id) {
 			this.id = id;
 		}
 		
