@@ -1,21 +1,26 @@
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Project1 {
-	enum department {
-			mathematics,
-			engineering,
-			english
-		}
+	public enum department {
+		mathematics,
+		engineering,
+		english
+	}
 		
-		enum rank {
-			professor,
-			adjunct
-		}
+	public enum rank {
+		professor,
+		adjunct
+	}
 		
-		enum status {
-			P, 									// Part-time
-			F									// Full-time
-		}
+	public enum status {
+		P, F 
+	}
+		
+	ArrayList<Student> students = new Arraylist<Student>();
+	ArrayList<Faculty> faculty = new Arraylist<Faculty>();
+	ArrayList<Staff> staff = new Arraylist<Staff>();	
+	final int numStudents = 2;
 		
 	public static int runMenu() { // Considering passing the 3 ArrayLists through here
 		
@@ -39,19 +44,30 @@ public class Project1 {
 
 		switch(choice) {
 				case 1:
-					System.out.println("Entering info for 2 students");
+					for (int i = 0; i < numStudents; ++i) {
+						System.out.println("Enter student " + (i + 1) + " info: ");
+						Student student = new Student();
+						students.add(student);
+						System.out.println("Student added!");
+					}
 					break;
 				case 2:
 					//generateInvoice(Students);
 					break;
 				case 3:
-					System.out.println("Entering faculty information");
+					System.out.println("Enter faculty info: ");
+					Faculty faculty = new Faculty();
+					faculty.add(faculty);
+					System.out.println("Faculty member added!");
 					break;
 				case 4:
 					System.out.println("Printing faculty information...");
 					break;
 				case 5:
-					System.out.println("Entering staff information");
+					System.out.println("Enter staff info: ");
+					Staff staff = new Staff();
+					staff.add(staff);
+					System.out.println("Staff member added!");
 					break;
 				case 6:
 					System.out.println("Printing staff information...");
@@ -77,11 +93,20 @@ public class Project1 {
 		final int numStudents = 2;
 		
 		// constructor
-		public Student(String fullName, int id, double gpa, int creditHours) {
-			this.fullName = fullName;
-			this.id = id;
-			this.gpa = gpa;
-			this.creditHours = creditHours;
+		public Student() {
+			scnr = new Scanner(System.in);
+			// String fullName, int id, double gpa, int creditHours
+			System.out.print("Name of Student: ");
+			fullName = scnr.nextLine();
+			
+			System.out.print("ID: ");
+			id = scnr.next();
+			
+			System.out.print("Gpa: ");
+			gpa = scnr.nextDouble();
+			
+			System.out.print("Credit Hours: ");
+			creditHours = scnr.nextInt();
 		}
 		
 		// Getters
@@ -145,10 +170,20 @@ public class Project1 {
 		
 		// constructor
 		public Faculty(String fullName, int id, department dept, rank rank) {
-			this.fullName = fullName;
-			this.id = id;
-			this.dept = dept;
-			this.rank = rank;
+			scnr = new Scanner(System.in);
+			// String fullName, int id, enum dept, enum status
+			System.out.print("Name of Staff: ");
+			fullName = scnr.nextLine();
+			
+			System.out.print("ID: ");
+			id = scnr.next();
+			
+			System.out.print("Department: "); // check against enum
+			dept = scnr.next().toLowerCase();
+			
+			System.out.print("Rank: ");
+			String tempRank = next().toLowerCase();
+			for (enum rank: enum
 		}
 		
 		// Getters
@@ -200,11 +235,20 @@ public class Project1 {
 		private department dept;
 		private status status;
 		
-		public Staff(String fullName, int id, department dept, status status) {
-			this.fullName = fullName;
-			this.id = id;
-			this.dept = dept;
-			this.status = status;
+		public Staff() {
+			scnr = new Scanner(System.in);
+			// String fullName, int id, enum dept, enum status
+			System.out.print("Name of Staff: ");
+			fullName = scnr.nextLine();
+			
+			System.out.print("ID: ");
+			id = scnr.next();
+			
+			System.out.print("Department: "); // check against enum
+			dept = scnr.next().toLowerCase();
+			
+			System.out.print("Status: ");
+			status = scnr.next();
 		}
 		
 		// Getters
