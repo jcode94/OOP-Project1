@@ -22,7 +22,7 @@ public class Project1 {
 	ArrayList<Staff> staff = new Arraylist<Staff>();	
 	final int numStudents = 2;
 		
-	public static int runMenu() { // Considering passing the 3 ArrayLists through here
+	public static int runMenu() {
 		
 		int choice = 0;
 		Scanner scnr = new Scanner(System.in);
@@ -43,6 +43,7 @@ public class Project1 {
 		choice = scnr.nextInt();
 
 		switch(choice) {
+				// Entering information for 2 students
 				case 1:
 					for (int i = 0; i < numStudents; ++i) {
 						System.out.println("Enter student " + (i + 1) + " info: ");
@@ -51,30 +52,37 @@ public class Project1 {
 						System.out.println("Student added!");
 					}
 					break;
+				// Generating invoice for 1 student
 				case 2:
-					//generateInvoice(Students);
+					generateInvoice();
 					break;
+				// Entering information for 1 faculty member
 				case 3:
 					System.out.println("Enter faculty info: ");
 					Faculty faculty = new Faculty();
 					faculty.add(faculty);
 					System.out.println("Faculty member added!");
 					break;
+				// Printing information for 1 faculty member
 				case 4:
-					System.out.println("Printing faculty information...");
+					printFacultyInfo();
 					break;
+				// Entering information for 1 staff member
 				case 5:
 					System.out.println("Enter staff info: ");
 					Staff staff = new Staff();
 					staff.add(staff);
 					System.out.println("Staff member added!");
 					break;
+				// Printing information for 1 staff member
 				case 6:
-					System.out.println("Printing staff information...");
+					printStaffInfo();
 					break;
+				// Exiting the program
 				case 7:
 					System.out.println("Exiting Program");
 					break;
+				// Invalid input choice
 				default:
 					System.out.println("Invalid choice. Please choose another.");
 					choice = 0;
@@ -86,7 +94,7 @@ public class Project1 {
 	
 	public class Student {
 		private String fullName;
-		private int id;
+		private String id;
 		private double gpa;
 		private int creditHours;
 		
@@ -153,18 +161,33 @@ public class Project1 {
 	}
 
 	// FIX ME
-	public static void generateInvoice(ArrayList<Student> students, Scanner scnr) {
-		int idx = 0;
+	public static void generateInvoice() {
+		private int idx = 0;
+		private totalCost = 0;
+		final double costPerCreditHour = 236.45; 
+		final double adminFee = 52.00;
 		
-		System.out.print("Which student? Enter 1 for FIRST STUDENT and 2 for SECOND STUDENT"); // FIX ME
-		idx = scnr.nextInt();
+		
+		System.out.print("Which student? 1 " + students.get(0).getFullName() + " or 2 " + students.get(1).getFullName() + " ? "); 
+		idx = scnr.nextInt() - 1;
+		totalCost = students.get(
+		
+		
+		System.out.println("---------------------------------------------------------------------------");
+		System.out.println(students.get(idx).getFullName() + "\t" + students.get(idx).getId());
+		System.out.println("Credit Hours:" + students.get(idx).getCreditHours() + "\t" + students.get(idx).getId());
+		System.out.println("Fees: $" + adminFee);
+		System.out.println();
+		System.out.println("Total payment (after discount): $"+ );
+		System.out.println("---------------------------------------------------------------------------");
+		
 		
 		//System.out.print("Here is the tuition invoice for " + students[idx].getFullName);
 	}
 
 	class Faculty {
 		private String fullName; 
-		private int id;
+		private String id;
 		private department dept;
 		private rank rank;
 		
@@ -231,7 +254,7 @@ public class Project1 {
 	
 	class Staff {
 		private String fullName; 
-		private int id;
+		private String id;
 		private department dept;
 		private status status;
 		
