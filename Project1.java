@@ -17,9 +17,9 @@ public class Project1 {
 		P, F 
 	}
 		
-	ArrayList<Student> students = new Arraylist<Student>();
-	ArrayList<Faculty> faculty = new Arraylist<Faculty>();
-	ArrayList<Staff> staff = new Arraylist<Staff>();	
+	ArrayList<User> students = new ArrayList<User>();
+	ArrayList<User> faculty = new ArrayList<User>();
+	ArrayList<User> staff = new ArrayList<User>();	
 	
 		
 	public static int runMenu() {
@@ -48,7 +48,8 @@ public class Project1 {
 				case 1:
 					for (int i = 0; i < numStudents; ++i) {
 						System.out.println("Enter student " + (i + 1) + " info: ");
-						Student student = new Student();
+						User student = new Student();
+						student.initStudent(scnr);
 						students.add(student);
 						System.out.println("Student added!");
 					}
@@ -60,7 +61,8 @@ public class Project1 {
 				// Entering information for 1 faculty member
 				case 3:
 					System.out.println("Enter faculty info: ");
-					Faculty faculty = new Faculty();
+					User faculty = new User();
+					faculty.initFaculty(scnr);
 					faculty.add(faculty);
 					System.out.println("Faculty member added!");
 					break;
@@ -71,7 +73,8 @@ public class Project1 {
 				// Entering information for 1 staff member
 				case 5:
 					System.out.println("Enter staff info: ");
-					Staff staff = new Staff();
+					User staff = new Staff();
+					staff.initStaff(scnr);
 					staff.add(staff);
 					System.out.println("Staff member added!");
 					break;
@@ -93,29 +96,80 @@ public class Project1 {
 		return choice;
 	}
 	
-	public class Student {
+	public class User {
 		private String fullName;
 		private String id;
 		private double gpa;
 		private int creditHours;
+		private department department;
+		private rank rank;
+		private status status;
 		
-		final int numStudents = 2;
+		// student constructor
+		public User(String fullName, String id, double gpa, int creditHours) {
+			this.fullName = fullName;
+			this.id = id;
+			this.gpa = gpa;
+			this.creditHours = creditHours;
+		}
 		
-		// constructor
-		public Student() {
-			scnr = new Scanner(System.in);
-			// String fullName, int id, double gpa, int creditHours
+		public User(String fullName, String id, department department, rank rank) {
+			this.fullName = fullName;
+			this.id = id;
+			this.department = department;
+			this.rank = rank;
+		}
+		
+		public User(String fullName, String id, department department, status status) {
+			this.fullName = fullName;
+			this.id = id;
+			this.department = department;
+			this.status = status;
+		}
+		
+		public static void initBasicInfo(Scanner scnr) {
+			// String fullName, int id
 			System.out.print("Name of Student: ");
-			fullName = scnr.nextLine();
+			this.fullName = scnr.nextLine();
 			
 			System.out.print("ID: ");
-			id = scnr.next();
+			this.id = scnr.next();
+		}
+		
+		public static void initStudent(Scanner scnr) {
 			
-			System.out.print("Gpa: ");
-			gpa = scnr.nextDouble();
+			initBasicInfo(scnr);
+		
+			// gpa, creditHours
+			System.out.print("Name of Student: ");
+			this.fullName = scnr.nextLine();
 			
-			System.out.print("Credit Hours: ");
-			creditHours = scnr.nextInt();
+			System.out.print("ID: ");
+			this.id = scnr.next();
+		}
+		
+		public static void initFaculty(Scanner scnr) {
+			
+			initBasicInfo(scnr);
+		
+			// department, rank
+			System.out.print("Department: ");
+			this.department = scnr.nextLine();
+			
+			System.out.print("Rank: ");
+			this.rank = scnr.next();
+		}
+		
+		public static void initStaff(Scanner scnr) {
+			
+			initBasicInfo(scnr);
+		
+			// department, status
+			System.out.print("Department: ");
+			this.department = scnr.nextLine();
+			
+			System.out.print("Status: ");
+			this.status = scnr.next();
 		}
 		
 		// Getters
@@ -139,6 +193,22 @@ public class Project1 {
 			return creditHours;
 		}
 		
+				
+		// Returns department
+		public department getdepartment() {
+			return department;
+		}
+		
+		// Returns rank
+		public rank getRank() {
+			return rank;
+		}
+		
+		// Returns creditHours
+		public status getStatus() {
+			return status;
+		}
+		
 		// Setters
 		// sets name
 		public void setName(String fullName) {
@@ -159,11 +229,41 @@ public class Project1 {
 		public void setCreditHours(int creditHours) {
 			this.creditHours = creditHours;
 		}
+		
+		// sets department
+		public void setdepartment(department department) {
+			this.department = department;
+		}
+		
+		// sets rank
+		public void setRank(rank rank) {
+			this.rank = rank;
+		}
+		
+		// sets status
+		public void setStatus(status status) {
+			this.status = status;
+		}
+		
+		public void printFacultyInfo() {
+			System.out.println("---------------------------------------------------------------------------");
+			System.out.println(faculty.get(0).getFullName + "\t" + faculty.get(0).getId);
+			System.out.println(faculty.get(0).getdepartment + ", " + faculty.get(0).getRank);
+			System.out.println("---------------------------------------------------------------------------");
+		}
+		
+		public void printStaffInfo() {
+			System.out.println("---------------------------------------------------------------------------");
+			System.out.println(staff.get(0).getFullName + "\t" + staff.get(0).getId);
+			System.out.println(staff.get(0).getdepartment + ", " + staff.get(0).getStatus);
+			System.out.println("---------------------------------------------------------------------------");
+		}
+		
 	}
 
 	public static void generateInvoice() {
-		private int idx = 0;
-		private totalCost = 0;
+		int idx = 0;
+		int totalCost = 0;
 		final double costPerCreditHour = 236.45; 
 		final double adminFee = 52.00;
 		final double discount = 0.85;
@@ -171,7 +271,9 @@ public class Project1 {
 		System.out.print("Which student? 1 " + students.get(0).getFullName() + " or 2 " + students.get(1).getFullName() + " ? "); 
 		System.out.println();
 		
-		idx = scnr.nextInt() - 1;
+		idx = scnr.nextInt();
+		idx--; // to adjust for zero-based index
+		
 		if (students.get(idx).getGPA >= 3.85)
 			totalCost = ((students.get(idx).getCreditHours() * costPerCreditHour) + adminFee) * discount;
 		else
@@ -189,152 +291,6 @@ public class Project1 {
 		
 	}
 
-	class Faculty {
-		private String fullName; 
-		private String id;
-		private department dept;
-		private rank rank;
-		
-		// constructor
-		public Faculty(String fullName, int id, department dept, rank rank) {
-			scnr = new Scanner(System.in);
-
-			System.out.print("Name of Staff: ");
-			fullName = scnr.nextLine();
-			
-			System.out.print("ID: ");
-			id = scnr.next();
-			
-			System.out.print("Department: "); // check against enum
-			dept = scnr.next().toLowerCase();
-			
-			System.out.print("Rank: "); // Figure out best way to input/validate enums
-			//String tempRank = next().toLowerCase();
-			//for (enum rank: enum ranks)?
-		}
-		
-		public void printFacultyInfo() {
-			System.out.println("---------------------------------------------------------------------------");
-			System.out.println(faculty.get(0).getFullName + "\t" + faculty.get(0).getId);
-			System.out.println(faculty.get(0).getDept + ", " + faculty.get(0).getRank);
-			System.out.println("---------------------------------------------------------------------------");
-		}
-		
-		// Getters
-		// Returns name
-		public String getName() {
-			return fullName;
-		}
-		
-		// Returns id
-		public String getId() {
-			return id;
-		}
-		
-		// Returns dept
-		public department getDept() {
-			return dept;
-		}
-		
-		// Returns rank
-		public rank getRank() {
-			return rank;
-		}
-		
-		// Setters
-		// sets name
-		public void setName(String fullName) {
-			this.fullName = fullName;
-		}
-		
-		// sets id
-		public void setId(String id) {
-			this.id = id;
-		}
-		
-		// sets dept
-		public void setDept(department dept) {
-			this.dept = dept;
-		}
-		
-		// sets rank
-		public void setRank(rank rank) {
-			this.rank = rank;
-		}
-	}
-	
-	class Staff {
-		private String fullName; 
-		private String id;
-		private department dept;
-		private status status;
-		
-		public Staff() {
-			scnr = new Scanner(System.in);
-
-			System.out.print("Name of Staff: ");
-			fullName = scnr.nextLine();
-			
-			System.out.print("ID: ");
-			id = scnr.next();
-			
-			System.out.print("Department: "); // check against enum
-			dept = scnr.next().toLowerCase();
-			
-			System.out.print("Status: ");
-			status = scnr.next();
-		}
-		
-		public void printStaffInfo() {
-			System.out.println("---------------------------------------------------------------------------");
-			System.out.println(staff.get(0).getFullName + "\t" + staff.get(0).getId);
-			System.out.println(staff.get(0).getDept + ", " + staff.get(0).getStatus);
-			System.out.println("---------------------------------------------------------------------------");
-		}
-		
-		// Getters
-		// Returns name
-		public String getName() {
-			return fullName;
-		}
-		
-		// Returns id
-		public String getId() {
-			return id;
-		}
-		
-		// Returns gpa
-		public department getDept() {
-			return dept;
-		}
-		
-		// Returns creditHours
-		public status getStatus() {
-			return status;
-		}
-		
-		// Setters
-		// sets name
-		public void setName(String fullName) {
-			this.fullName = fullName;
-		}
-		
-		// sets id
-		public void setId(String id) {
-			this.id = id;
-		}
-		
-		// sets dept
-		public void setDept(department dept) {
-			this.dept = dept;
-		}
-		
-		// sets status
-		public void setStatus(status status) {
-			this.status = status;
-		}
-	}
-	
 	public static void main(String[] args) {
 		
 		int choice = 0;
