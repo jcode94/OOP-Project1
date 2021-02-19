@@ -3,9 +3,45 @@ public class User {
 		private String id;
 		private double gpa;
 		private int creditHours;
-		private department department;
-		private rank rank;
-		private status status;
+		enum department {
+			mathematics,
+			engineering,
+			english;
+			
+			public static department isMember(String department) {
+				for (department d : values()) {
+					if (d.department.equals(department)) {
+						return d;
+					}
+				}
+				return null; // FIX ME add the error checking for null
+			}
+		}
+		enum rank {
+			professor,
+			adjunct;
+			
+			public static rank isMember(String rank) {
+				for (rank r: values()) {
+					if (r.rank.equals(rank)) {
+						return r;
+					}
+				}
+				return null; // FIX ME add the error checking for null
+			}
+		}
+		enum status {
+			P, F;
+			
+			public static status isMember(String status) {
+				for (status s: values()) {
+					if (s.status.equals(status)) {
+						return s;
+					}
+				}
+				return null; // FIX ME add the error checking for null
+			}
+		}
 		
 		// student constructor
 		public User(String fullName, String id, double gpa, int creditHours) {
@@ -16,7 +52,7 @@ public class User {
 		}
 		
 		// faculty constructor
-		public User(String fullName, String id, department department, rank rank) {
+		public User(String fullName, String id, enum department, enum rank) {
 			this.fullName = fullName;
 			this.id = id;
 			this.department = department;
@@ -24,7 +60,7 @@ public class User {
 		}
 		
 		// staff constructor
-		public User(String fullName, String id, department department, status status) {
+		public User(String fullName, String id, enum department, enum status) {
 			this.fullName = fullName;
 			this.id = id;
 			this.department = department;
@@ -136,17 +172,17 @@ public class User {
 		}
 		
 		// sets department
-		public void setdepartment(department department) {
+		public void setdepartment(enum department) {
 			this.department = department;
 		}
 		
 		// sets rank
-		public void setRank(rank rank) {
+		public void setRank(enum rank) {
 			this.rank = rank;
 		}
 		
 		// sets status
-		public void setStatus(status status) {
+		public void setStatus(enum status) {
 			this.status = status;
 		}
 		
@@ -192,6 +228,5 @@ public class User {
 		System.out.println("Total payment (after discount): $"+ totalCost);
 		System.out.println("---------------------------------------------------------------------------");
 		
-	}
 	}
 }

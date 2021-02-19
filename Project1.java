@@ -2,20 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Project1 {
-	public enum department {
-		mathematics,
-		engineering,
-		english
-	}
-		
-	public enum rank {
-		professor,
-		adjunct
-	}
-		
-	public enum status {
-		P, F 
-	}
+	
 		
 	ArrayList<User> students = new ArrayList<>();
 	ArrayList<User> faculty = new ArrayList<>();
