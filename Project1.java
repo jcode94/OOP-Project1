@@ -28,7 +28,7 @@ public class Project1 {
 		final int numStudents = 2;
 		Scanner scnr = new Scanner(System.in);
 		
-		System.out.println("\t\t\tWelcome to my Personal Management Program\n");
+		System.out.println("\t\t\tWelcome to my Personal Management Program\n"
 							+ "Choose one of the options:\n"
 							+ "1- Enter information for two students\n"
 							+ "2- Print tuition invoice\n"
