@@ -1,19 +1,18 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Project1 {
 	
 		
-	public static ArrayList<User> students = new ArrayList<>();
-	public static ArrayList<User> faculty = new ArrayList<>();
-	public static ArrayList<User> staff = new ArrayList<>();	
+	ArrayList<User> students = new ArrayList<>();
+	ArrayList<User> faculty = new ArrayList<>();
+	ArrayList<User> staff = new ArrayList<>();	
 	
 		
 	public static int runMenu() {
 		
 		int choice = 0;
 		final int numStudents = 2;
-		Scanner scnr = new Scanner(System.in);
+		Scanner in = new Scanner(System.in);
 		
 		System.out.println("\t\t\tWelcome to my Personal Management Program\n"
 							+ "Choose one of the options:\n"
@@ -27,7 +26,7 @@ public class Project1 {
 							+ "\tEnter your selection: ");	
 		
 		// Menu selection
-		choice = scnr.nextInt();
+		choice = in.nextInt();
 
 		switch(choice) {
 				// Entering information for 2 students
@@ -35,38 +34,38 @@ public class Project1 {
 					for (int i = 0; i < numStudents; ++i) {
 						System.out.println("Enter student " + (i + 1) + " info: ");
 						User student = new User();
-						student.initStudent(scnr);
+						student.initStudent(in);
 						students.add(student);
 						System.out.println("Student added!");
 					}
 					break;
 				// Generating invoice for 1 student
 				case 2:
-					User.generateInvoice();
+					generateInvoice();
 					break;
 				// Entering information for 1 faculty member
 				case 3:
 					System.out.println("Enter faculty info: ");
 					User faculty = new User();
-					faculty.initFaculty(scnr);
+					faculty.initFaculty(in);
 					faculty.add(faculty);
 					System.out.println("Faculty member added!");
 					break;
 				// Printing information for 1 faculty member
 				case 4:
-					User.printFacultyInfo();
+					printFacultyInfo();
 					break;
 				// Entering information for 1 staff member
 				case 5:
 					System.out.println("Enter staff info: ");
 					User staff = new User();
-					staff.initStaff(scnr);
+					staff.initStaff(in);
 					staff.add(staff);
 					System.out.println("Staff member added!");
 					break;
 				// Printing information for 1 staff member
 				case 6:
-					User.printStaffInfo();
+					printStaffInfo();
 					break;
 				// Exiting the program
 				case 7:

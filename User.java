@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class User {
 		private String fullName;
@@ -7,102 +7,37 @@ public class User {
 		private int creditHours;
 		private String department;
 		private String rank;
-		private char status;
-		enum department {
-			mathematics,
-			engineering,
-			english;
-			
-			public static department isMember(String department) {
-				for (department d : values()) {
-					if (d.department.equals(department)) {
-						return d;
-					}
-				}
-				return null; // FIX ME add the error checking for null
-			}
-		}
-		enum rank {
-			professor,
-			adjunct;
-			
-			public static rank isMember(String rank) {
-				for (rank r: values()) {
-					if (r.rank.equals(rank)) {
-						return r;
-					}
-				}
-				return null; // FIX ME add the error checking for null
-			}
-		}
-		enum status {
-			P, F;
-			
-			public static status isMember(String status) {
-				for (status s: values()) {
-					if (s.status.equals(status)) {
-						return s;
-					}
-				}
-				return null; // FIX ME add the error checking for null
-			}
-		}
+		private String status;
 		
 		// student constructor
 		public User() {
-			this.fullName = "";
-			this.id = "";
-			this.gpa = 0.0;
-			this.creditHours = 0;
-			this.department = "";
-			this.rank = "";
-			this.status = '';
 		}
 		
 		// generic info for all
-		public void initBasicInfo(Scanner scnr) {
-			// String fullName and id
-			System.out.print("Name: ");
-			this.fullName = scnr.nextLine();
-			
-			System.out.print("ID: ");
-			this.id = scnr.next();
+		public void initBasicInfo(Scanner in) {
+			this.fullName = setName(in);
+			this.id = setId(in);
 		}
 		
-		public void initStudent(Scanner scnr) {
-			
-			initBasicInfo(scnr);
+		public void initStudent(Scanner in) {
+			initBasicInfo(in);
 		
-			// gpa, creditHours
-			System.out.print("GPA: ");
-			this.gpa = scnr.nextDouble();
-			
-			System.out.print("Credit Hours: ");
-			this.creditHours = scnr.nextInt();
+			this.gpa = setGpa(in);
+			this.creditHours = setCreditHours(in);
 		}
 		
-		public void initFaculty(Scanner scnr) {
-			
-			initBasicInfo(scnr);
+		public void initFaculty(Scanner in) {
+			initBasicInfo(in);
 		
-			// department, rank
-			System.out.print("Department: ");
-			this.department = scnr.nextLine();
-			
-			System.out.print("Rank: ");
-			this.rank = scnr.next();
+			this.department = setDepartment(in);
+			this.rank = setRank(in);
 		}
 		
-		public void initStaff(Scanner scnr) {
-			
-			initBasicInfo(scnr);
+		public void initStaff(Scanner in) {
+			initBasicInfo(in);
 		
-			// department, status
-			System.out.print("Department: ");
-			this.department = scnr.nextLine();
-			
-			System.out.print("Status: ");
-			this.status = scnr.nextChar();
+			this.department = setDepartment(in);
+			this.status = setStatus(in);
 		}
 		
 		// Getters
@@ -137,87 +72,121 @@ public class User {
 		}
 		
 		// Returns creditHours
-		public char getStatus() {
+		public String getStatus() {
 			return status;
 		}
 		
-		// Setters
-		// sets name
-		public void setName(String fullName) {
-			this.fullName = fullName;
+		public String setName(Scanner in) {
+			String fullName;
+			System.out.print("Name: ");
+			fullName = in.nextLine();
+			return fullName;
 		}
 		
-		// sets id
-		public void setId(String id) {
-			this.id = id;
+		public String setId(Scanner in) {
+			String id;
+			System.out.print("ID: ");
+			id = in.next();
+			return id;
 		}
 		
-		// sets gpa
-		public void setGpa(double gpa) {
-			this.gpa = gpa;
+		public double setGpa(Scanner in) {
+			double gpa;
+			System.out.print("Gpa: ");
+			gpa = in.nextDouble();
+			return gpa;
 		}
 		
-		// sets creditHours
-		public void setCreditHours(int creditHours) {
-			this.creditHours = creditHours;
+		public int setCreditHours(Scanner in) {
+			int creditHours;
+			System.out.print("Credit hours: ");
+			creditHours = in.nextInt();
+			return creditHours;
 		}
 		
-		// sets department
-		public void setdepartment(String department) {
-			this.department = department;
+		public String setDepartment(Scanner in) {
+			String department;
+			private static final Set<String> VALUES = Set.of(
+				"mathematics", "engineering", "english"
+			);
+			do {				
+				System.out.print("Department: ");
+				department = in.nextLine().toLowerCase();
+				if (!VALUES.contains(department))
+					System.out.println("\"" + department + "\" is invalid");
+			}while (!VALUES.contains(department));
+			return department;				
 		}
 		
-		// sets rank
-		public void setRank(String rank) {
-			this.rank = rank;
+		public String setRank(Scanner in) {
+			String rank;
+			private static final Set<String> VALUES = Set.of(
+				"professor", "adjunct"
+			);
+			do {				
+				System.out.print("Rank: ");
+				rank = in.nextLine();
+				if (!VALUES.contains(rank))
+					System.out.println("\"" + rank + "\" is invalid");
+			}while (!VALUES.contains(rank));
+			return rank;	
 		}
 		
-		// sets status
-		public void setStatus(char status) {
-			this.status = status;
+		public String setStatus(Scanner in) {
+			String status;
+			private static final Set<String> VALUES = Set.of(
+				"p", "f"
+			);
+			do {				
+				System.out.print("Status: ");
+				status = in.nextLine();
+				if (!VALUES.contains(status))
+					System.out.println("\"" + status + "\" is invalid");
+			}while (!VALUES.contains(status));
+			return status;	
 		}
 		
-		public void printFacultyInfo() {
-			System.out.println("---------------------------------------------------------------------------");
-			System.out.println(faculty.get(0).getFullName + "\t" + faculty.get(0).getId);
-			System.out.println(faculty.get(0).getdepartment + ", " + faculty.get(0).getRank);
-			System.out.println("---------------------------------------------------------------------------");
+		public static void printFacultyInfo() {
+			System.out.println("---------------------------------------------------------------------------\n"
+								+ faculty.get(0).getFullName() + "\t" + faculty.get(0).getId() + "\n"
+								+ faculty.get(0).getDepartment() + ", " + faculty.get(0).getRank() + "\n"
+								+ "---------------------------------------------------------------------------");
 		}
 		
-		public void printStaffInfo() {
-			System.out.println("---------------------------------------------------------------------------");
-			System.out.println(staff.get(0).getFullName + "\t" + staff.get(0).getId);
-			System.out.println(staff.get(0).getdepartment + ", " + staff.get(0).getStatus);
-			System.out.println("---------------------------------------------------------------------------");
+		public static void printStaffInfo() {
+			System.out.println("---------------------------------------------------------------------------\n"
+								+ staff.get(0).getFullName() + "\t" + staff.get(0).getId() + "\n"
+								+ staff.get(0).getDepartment() + ", " + staff.get(0).getStatus() + "\n"
+								+ "---------------------------------------------------------------------------");
 		}
 		
-		public void generateInvoice() {
-		int idx = 0;
-		int totalCost = 0;
-		final double costPerCreditHour = 236.45; 
-		final double adminFee = 52.00;
-		final double discount = 0.85;
-		
-		System.out.print("Which student? 1 " + students.get(0).getFullName() + " or 2 " + students.get(1).getFullName() + " ? "); 
-		System.out.println();
-		
-		idx = scnr.nextInt();
-		idx--; // to adjust for zero-based index
-		
-		if (students.get(idx).getGPA >= 3.85)
-			totalCost = ((students.get(idx).getCreditHours() * costPerCreditHour) + adminFee) * discount;
-		else
-			totalCost = (students.get(idx).getCreditHours() * costPerCreditHour) + adminFee;
-		
-		System.out.println("Here is the tuition invoice for " + students.get(idx).getFullName + " :");
-		System.out.println();
-		System.out.println("---------------------------------------------------------------------------");
-		System.out.println(students.get(idx).getFullName() + "\t" + students.get(idx).getId());
-		System.out.println("Credit Hours:" + students.get(idx).getCreditHours() + "\t" + students.get(idx).getId());
-		System.out.println("Fees: $" + adminFee);
-		System.out.println();
-		System.out.println("Total payment (after discount): $"+ totalCost);
-		System.out.println("---------------------------------------------------------------------------");
-		
+		public static void generateInvoice() {
+			int idx;
+			double totalCost, totalDiscount = 0.0;
+			final double costPerCreditHour = 236.45; 
+			final double adminFee = 52.00;
+			final double discount = 0.15;
+			
+			System.out.print("Which student? 1 " + students.get(0).getFullName() 
+									  + " or 2 " + students.get(1).getFullName() + " ? "); 
+			
+			
+			idx = in.nextInt();
+			idx--; // to adjust for zero-based index
+			
+			if (students.get(idx).getGPA >= 3.85)
+				totalCost = ((students.get(idx).getCreditHours() * costPerCreditHour) + adminFee) * (1 - discount);
+				totalDiscount = ((students.get(idx).getCreditHours() * costPerCreditHour) + adminFee) * discount);
+			else
+				totalCost = (students.get(idx).getCreditHours() * costPerCreditHour) + adminFee;
+			
+			System.out.println("\nHere is the tuition invoice for " + students.get(idx).getFullName() + " :\n"
+								+ "---------------------------------------------------------------------------\n"
+								+ students.get(idx).getFullName() + "\t" + students.get(idx).getId() + "\n"
+								+ "Credit Hours:" + students.get(idx).getCreditHours() + "\t($236.45/credit hour)\n"
+								+ "Fees: $52\n\n"
+								+ "Total payment (after discount): $"+ totalCost + "\t\t($" + totalDiscount + "discount applied)\n"
+								+ "---------------------------------------------------------------------------");
+		}	
 	}
 }
