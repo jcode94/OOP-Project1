@@ -32,7 +32,7 @@ public class User {
 		}
 		
 		// generic info for all
-		public static void initBasicInfo(Scanner scnr) {
+		public void initBasicInfo(Scanner scnr) {
 			// String fullName and id
 			System.out.print("Name: ");
 			this.fullName = scnr.nextLine();
@@ -41,7 +41,7 @@ public class User {
 			this.id = scnr.next();
 		}
 		
-		public static void initStudent(Scanner scnr) {
+		public void initStudent(Scanner scnr) {
 			
 			initBasicInfo(scnr);
 		
@@ -53,7 +53,7 @@ public class User {
 			this.creditHours = scnr.nextInt();
 		}
 		
-		public static void initFaculty(Scanner scnr) {
+		public void initFaculty(Scanner scnr) {
 			
 			initBasicInfo(scnr);
 		
@@ -65,7 +65,7 @@ public class User {
 			this.rank = scnr.next();
 		}
 		
-		public static void initStaff(Scanner scnr) {
+		public void initStaff(Scanner scnr) {
 			
 			initBasicInfo(scnr);
 		
@@ -164,5 +164,34 @@ public class User {
 			System.out.println("---------------------------------------------------------------------------");
 		}
 		
+		public void generateInvoice() {
+		int idx = 0;
+		int totalCost = 0;
+		final double costPerCreditHour = 236.45; 
+		final double adminFee = 52.00;
+		final double discount = 0.85;
+		
+		System.out.print("Which student? 1 " + students.get(0).getFullName() + " or 2 " + students.get(1).getFullName() + " ? "); 
+		System.out.println();
+		
+		idx = scnr.nextInt();
+		idx--; // to adjust for zero-based index
+		
+		if (students.get(idx).getGPA >= 3.85)
+			totalCost = ((students.get(idx).getCreditHours() * costPerCreditHour) + adminFee) * discount;
+		else
+			totalCost = (students.get(idx).getCreditHours() * costPerCreditHour) + adminFee;
+		
+		System.out.println("Here is the tuition invoice for " + students.get(idx).getFullName + " :");
+		System.out.println();
+		System.out.println("---------------------------------------------------------------------------");
+		System.out.println(students.get(idx).getFullName() + "\t" + students.get(idx).getId());
+		System.out.println("Credit Hours:" + students.get(idx).getCreditHours() + "\t" + students.get(idx).getId());
+		System.out.println("Fees: $" + adminFee);
+		System.out.println();
+		System.out.println("Total payment (after discount): $"+ totalCost);
+		System.out.println("---------------------------------------------------------------------------");
+		
+	}
 	}
 }

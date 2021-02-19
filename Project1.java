@@ -94,38 +94,8 @@ public class Project1 {
 		
 		return choice;
 	}
-	
-	
 
-	public static void generateInvoice() {
-		int idx = 0;
-		int totalCost = 0;
-		final double costPerCreditHour = 236.45; 
-		final double adminFee = 52.00;
-		final double discount = 0.85;
-		
-		System.out.print("Which student? 1 " + students.get(0).getFullName() + " or 2 " + students.get(1).getFullName() + " ? "); 
-		System.out.println();
-		
-		idx = scnr.nextInt();
-		idx--; // to adjust for zero-based index
-		
-		if (students.get(idx).getGPA >= 3.85)
-			totalCost = ((students.get(idx).getCreditHours() * costPerCreditHour) + adminFee) * discount;
-		else
-			totalCost = (students.get(idx).getCreditHours() * costPerCreditHour) + adminFee;
-		
-		System.out.println("Here is the tuition invoice for " + students.get(idx).getFullName + " :");
-		System.out.println();
-		System.out.println("---------------------------------------------------------------------------");
-		System.out.println(students.get(idx).getFullName() + "\t" + students.get(idx).getId());
-		System.out.println("Credit Hours:" + students.get(idx).getCreditHours() + "\t" + students.get(idx).getId());
-		System.out.println("Fees: $" + adminFee);
-		System.out.println();
-		System.out.println("Total payment (after discount): $"+ totalCost);
-		System.out.println("---------------------------------------------------------------------------");
-		
-	}
+	
 
 	public static void main(String[] args) {
 		
