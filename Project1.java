@@ -4,9 +4,9 @@ import java.util.ArrayList;
 public class Project1 {
 	
 		
-	ArrayList<User> students = new ArrayList<>();
-	ArrayList<User> faculty = new ArrayList<>();
-	ArrayList<User> staff = new ArrayList<>();	
+	public static ArrayList<User> students = new ArrayList<>();
+	public static ArrayList<User> faculty = new ArrayList<>();
+	public static ArrayList<User> staff = new ArrayList<>();	
 	
 		
 	public static int runMenu() {
@@ -34,7 +34,7 @@ public class Project1 {
 				case 1:
 					for (int i = 0; i < numStudents; ++i) {
 						System.out.println("Enter student " + (i + 1) + " info: ");
-						User student = new Student();
+						User student = new User();
 						student.initStudent(scnr);
 						students.add(student);
 						System.out.println("Student added!");
@@ -42,7 +42,7 @@ public class Project1 {
 					break;
 				// Generating invoice for 1 student
 				case 2:
-					generateInvoice();
+					User.generateInvoice();
 					break;
 				// Entering information for 1 faculty member
 				case 3:
@@ -54,19 +54,19 @@ public class Project1 {
 					break;
 				// Printing information for 1 faculty member
 				case 4:
-					printFacultyInfo();
+					User.printFacultyInfo();
 					break;
 				// Entering information for 1 staff member
 				case 5:
 					System.out.println("Enter staff info: ");
-					User staff = new Staff();
+					User staff = new User();
 					staff.initStaff(scnr);
 					staff.add(staff);
 					System.out.println("Staff member added!");
 					break;
 				// Printing information for 1 staff member
 				case 6:
-					printStaffInfo();
+					User.printStaffInfo();
 					break;
 				// Exiting the program
 				case 7:

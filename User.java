@@ -1,8 +1,13 @@
+import java.util.Scanner;
+
 public class User {
 		private String fullName;
 		private String id;
 		private double gpa;
 		private int creditHours;
+		private String department;
+		private String rank;
+		private char status;
 		enum department {
 			mathematics,
 			engineering,
@@ -44,27 +49,14 @@ public class User {
 		}
 		
 		// student constructor
-		public User(String fullName, String id, double gpa, int creditHours) {
-			this.fullName = fullName;
-			this.id = id;
-			this.gpa = gpa;
-			this.creditHours = creditHours;
-		}
-		
-		// faculty constructor
-		public User(String fullName, String id, enum department, enum rank) {
-			this.fullName = fullName;
-			this.id = id;
-			this.department = department;
-			this.rank = rank;
-		}
-		
-		// staff constructor
-		public User(String fullName, String id, enum department, enum status) {
-			this.fullName = fullName;
-			this.id = id;
-			this.department = department;
-			this.status = status;
+		public User() {
+			this.fullName = "";
+			this.id = "";
+			this.gpa = 0.0;
+			this.creditHours = 0;
+			this.department = "";
+			this.rank = "";
+			this.status = '';
 		}
 		
 		// generic info for all
@@ -110,7 +102,7 @@ public class User {
 			this.department = scnr.nextLine();
 			
 			System.out.print("Status: ");
-			this.status = scnr.next();
+			this.status = scnr.nextChar();
 		}
 		
 		// Getters
@@ -133,20 +125,19 @@ public class User {
 		public int getCreditHours() {
 			return creditHours;
 		}
-		
-				
+			
 		// Returns department
-		public department getdepartment() {
+		public String getdepartment() {
 			return department;
 		}
 		
 		// Returns rank
-		public rank getRank() {
+		public String getRank() {
 			return rank;
 		}
 		
 		// Returns creditHours
-		public status getStatus() {
+		public char getStatus() {
 			return status;
 		}
 		
@@ -172,17 +163,17 @@ public class User {
 		}
 		
 		// sets department
-		public void setdepartment(enum department) {
+		public void setdepartment(String department) {
 			this.department = department;
 		}
 		
 		// sets rank
-		public void setRank(enum rank) {
+		public void setRank(String rank) {
 			this.rank = rank;
 		}
 		
 		// sets status
-		public void setStatus(enum status) {
+		public void setStatus(char status) {
 			this.status = status;
 		}
 		
