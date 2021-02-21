@@ -75,13 +75,17 @@ public class Project1 {
 					
 				// Generating invoice for 1 student
 				case 2:
-					System.out.print("Which student? Enter 1 for " 
-									+ students.get(0).getName() + " or Enter 2 for "
-									+ students.get(1).getName() + ": ");
-					int idx = in.nextInt();
-					in.nextLine(); // newline char
-					idx--; // for zero-index array
-					students.get(idx).generateInvoice();					
+					if (!students.isEmpty()) {
+						System.out.print("Which student? Enter 1 for " 
+										+ students.get(0).getName() + " or Enter 2 for "
+										+ students.get(1).getName() + ": ");
+						int idx = in.nextInt();
+						in.nextLine(); // newline char
+						idx--; // for zero-index array
+						students.get(idx).generateInvoice();					
+					}
+					else
+						System.out.println("The system contains no student information.\n");
 					break;
 				// Entering information for 1 faculty member
 				case 3:
@@ -89,11 +93,14 @@ public class Project1 {
 					Faculty newFaculty = new Faculty();
 					newFaculty.initFaculty(in);
 					faculty.add(newFaculty);
-					System.out.println("Faculty member added!");
+					System.out.println("Faculty member added!");	
 					break;
 				// Printing information for 1 faculty member
 				case 4:
-					faculty.get(0).print();
+					if (!faculty.isEmpty()) 
+						faculty.get(0).print();
+					else
+						System.out.println("The system contains no faculty information.\n");
 					break;
 				// Entering information for 1 staff member
 				case 5:
@@ -105,7 +112,10 @@ public class Project1 {
 					break;
 				// Printing information for 1 staff member
 				case 6:
-					staff.get(0).print();
+					if (!staff.isEmpty())
+						staff.get(0).print();
+					else
+						System.out.println("The system contains no staff information.\n");
 					break;
 				// Exiting the program
 				case 7:
