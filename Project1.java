@@ -7,14 +7,14 @@ import java.util.*;
 
 public class Project1 {
 	public static void printMenu() {
-		System.out.print("Choose one of the options:\n\n"
-							+ "1- Enter information for two students\n"
-							+ "2- Print tuition invoice\n"
-							+ "3- Enter faculty member information\n"
-							+ "4- Print faculty member information\n"
-							+ "5- Enter staff member information\n"
-							+ "6- Print staff member information\n"
-							+ "7- Exit Program\n\n"
+		System.out.print(" Choose one of the options:\n\n"
+							+ " 1- Enter information for two students\n"
+							+ " 2- Print tuition invoice\n"
+							+ " 3- Enter faculty member information\n"
+							+ " 4- Print faculty member information\n"
+							+ " 5- Enter staff member information\n"
+							+ " 6- Print staff member information\n"
+							+ " 7- Exit Program\n\n"
 							+ "\tEnter your selection: ");
 	}
 	
@@ -27,7 +27,7 @@ public class Project1 {
 		int choice;
 		final int numStudents = 2;
 		
-		System.out.println("\t\t\tWelcome to my Personal Management Program\n\n");
+		System.out.println("\n\t\t\tWelcome to my Personal Management Program\n\n");
 		// Driver loop
 		do {
 			printMenu();
@@ -46,8 +46,8 @@ public class Project1 {
 				case 1:
 					// Record exists
 					if (!students.isEmpty()) {
-						System.out.print("You already have two students filled in. Do you want to update their information?\n"
-										 + "Yes or No: ");
+						System.out.print(" You already have two students filled in. Do you want to update their information?\n"
+										 + " Yes or No: ");
 						String overwrite = in.nextLine();
 						if (overwrite.equalsIgnoreCase("Yes")) {
 							for (int i = 0; i < numStudents; ++i) {
@@ -64,7 +64,7 @@ public class Project1 {
 					// No record
 					else
 						for (int i = 0; i < numStudents; ++i) {
-							System.out.println("Enter student " + (i + 1) + " info: \n");
+							System.out.println(" Enter student " + (i + 1) + " info: \n");
 							Student newStudent = new Student();
 							newStudent.initStudent(in);
 							students.add(newStudent);
@@ -76,7 +76,7 @@ public class Project1 {
 				// Generating invoice for 1 student
 				case 2:
 					if (!students.isEmpty()) {
-						System.out.print("Which student? Enter 1 for " 
+						System.out.print(" Which student? Enter 1 for " 
 										+ students.get(0).getName() + " or Enter 2 for "
 										+ students.get(1).getName() + ": ");
 						int idx = in.nextInt();
@@ -85,52 +85,52 @@ public class Project1 {
 						students.get(idx).generateInvoice();					
 					}
 					else
-						System.out.println("The system contains no student information.\n");
+						System.out.println(" The system contains no student information.\n");
 					break;
 				// Entering information for 1 faculty member
 				case 3:
-					System.out.println("Enter faculty info:\n");
+					System.out.println(" Enter faculty info:\n");
 					Faculty newFaculty = new Faculty();
 					newFaculty.initFaculty(in);
 					faculty.add(newFaculty);
-					System.out.println("Faculty member added!");	
+					System.out.println(" Faculty member added!");	
 					break;
 				// Printing information for 1 faculty member
 				case 4:
 					if (!faculty.isEmpty()) 
 						faculty.get(0).print();
 					else
-						System.out.println("The system contains no faculty information.\n");
+						System.out.println(" The system contains no faculty information.\n");
 					break;
 				// Entering information for 1 staff member
 				case 5:
-					System.out.println("Enter staff info:\n");
+					System.out.println(" Enter staff info:\n");
 					Staff newStaff = new Staff();
 					newStaff.initStaff(in);
 					staff.add(newStaff);
-					System.out.println("Staff member added!");
+					System.out.println(" Staff member added!");
 					break;
 				// Printing information for 1 staff member
 				case 6:
 					if (!staff.isEmpty())
 						staff.get(0).print();
 					else
-						System.out.println("The system contains no staff information.\n");
+						System.out.println(" The system contains no staff information.\n");
 					break;
 				// Exiting the program
 				case 7:
-					System.out.println("Exiting Program");
+					System.out.println(" Exiting Program");
 					break;
 				// Invalid input choice
 				default:
-					System.out.println("Invalid entry. Please try again.");
+					System.out.println(" Invalid entry. Please try again.");
 					choice = 0;
 					break;
 			}
 		} while(choice != 7);
 		
 		// Exit Message
-		System.out.println("Goodbye!");
+		System.out.println(" Goodbye!");
 		
 		return;
 	}	
@@ -222,12 +222,12 @@ class Student extends User {
 		else
 			totalPayment = (creditHours * tuition) + fees;
 			
-		System.out.println("Here is the tuition invoice for " + getName() + " :\n"
+		System.out.println(" Here is the tuition invoice for " + getName() + " :\n"
 							+ "---------------------------------------------------------------------------\n"
-							+ getName() + "\t\t\t" + getId() + "\n"
-							+ "Credit Hours:" + getCreditHours() + " ($236.45/credit hour)\n"
-							+ "Fees: $" + fees + "\n\n"
-							+ "Total payment (after discount): $" + String.format("%.2f", totalPayment) + "\t\t($" + String.format("%.2f", totalDiscount) + " discount applied)\n"
+							+ " " + getName() + "\t\t\t" + getId() + "\n"
+							+ " Credit Hours:" + getCreditHours() + " ($236.45/credit hour)\n"
+							+ " Fees: $" + fees + "\n\n"
+							+ " Total payment (after discount): $" + String.format("%.2f", totalPayment) + "\t($" + String.format("%.2f", totalDiscount) + " discount applied)\n"
 							+ "---------------------------------------------------------------------------");
 	}
 	
@@ -329,8 +329,8 @@ class Faculty extends User {
 	// Outputs the faculty info
 	public void print() {
 		System.out.println("---------------------------------------------------------------------------\n"
-							+ getName() + "\t\t" + getId() + "\n\n"
-							+ getDepartment() + " Department, " + getRank() + "\n"
+							+ " " + getName() + "\t\t" + getId() + "\n\n"
+							+ " " + getDepartment() + " Department, " + getRank() + "\n"
 							+ "---------------------------------------------------------------------------\n");
 	}
 }
@@ -414,8 +414,8 @@ class Staff extends User {
 	// Outputs the staff info
 	public void print() {
 		System.out.println("---------------------------------------------------------------------------\n"
-							+ getName() + "\t\t" + getId() + "\n\n"
-							+ getDepartment() + " Department, " + getStatus() + "\n"
+							+ " " + getName() + "\t\t" + getId() + "\n\n"
+							+ " " + getDepartment() + " Department, " + getStatus() + "\n"
 							+ "---------------------------------------------------------------------------\n");
 	}
 }
