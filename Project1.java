@@ -1,3 +1,8 @@
+/*
+-  Project 1
+-  Justice Smith, Taylor Andrew
+*/
+
 import java.util.*;
 
 public class Project1 {
@@ -50,7 +55,7 @@ public class Project1 {
 								Student newStudent = new Student();
 								newStudent.initStudent(in);
 								students.add(newStudent);
-								System.out.println("\nThanks!\n\n");
+								System.out.println("\nStudent added!\n\n");
 							}
 							break;
 						}
@@ -63,7 +68,7 @@ public class Project1 {
 							Student newStudent = new Student();
 							newStudent.initStudent(in);
 							students.add(newStudent);
-							System.out.println("\nThanks!\n\n");
+							System.out.println("\nStudent added!\n\n");
 						}
 						
 					break;
@@ -84,7 +89,7 @@ public class Project1 {
 					Faculty newFaculty = new Faculty();
 					newFaculty.initFaculty(in);
 					faculty.add(newFaculty);
-					System.out.println("Faculty successfully added!");
+					System.out.println("Faculty member added!");
 					break;
 				// Printing information for 1 faculty member
 				case 4:
@@ -121,16 +126,19 @@ public class Project1 {
 	}	
 }
 
+// Parent class
 class User {
+	// Instance variables
 	private String fullName;
 	private String id;
 	
+	// Constructor
 	User() {
 		setName("No Name Set");
 		setId("No Name Set");
 	}
 	
-	// generic info for all
+	// Generic info shared by all child classes
 	public void initBasicInfo(Scanner in) {
 		System.out.print("\tName: ");
 		String name = in.nextLine();
@@ -141,6 +149,7 @@ class User {
 		setId(id);
 	}
 	
+	// Getters
 	public String getName() {
 		return fullName;
 	}
@@ -149,6 +158,7 @@ class User {
 		return id;
 	}
 	
+	// Setters
 	public void setName(String name) {
 		this.fullName = name;
 	}
@@ -158,6 +168,7 @@ class User {
 	}
 }
 
+// Child class
 class Student extends User {
 	// Instance variables
 	private double gpa;
@@ -173,6 +184,7 @@ class Student extends User {
 	public void initStudent(Scanner in) {
 		double gpa;
 		int creditHours;
+		
 		initBasicInfo(in);
 		
 		System.out.print("\tGPA: ");
@@ -226,6 +238,7 @@ class Student extends User {
 	}
 }
 
+// Child class
 class Faculty extends User {
 	// Instance variables
 	private String department;
