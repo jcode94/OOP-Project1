@@ -2,16 +2,15 @@ import java.util.*;
 
 public class Project1 {
 	public static void printMenu() {
-		System.out.print("\t\t\tWelcome to my Personal Management Program\n"
-							+ "Choose one of the options:\n"
+		System.out.print("Choose one of the options:\n\n"
 							+ "1- Enter information for two students\n"
 							+ "2- Print tuition invoice\n"
 							+ "3- Enter faculty member information\n"
 							+ "4- Print faculty member information\n"
 							+ "5- Enter staff member information\n"
 							+ "6- Print staff member information\n"
-							+ "7- Exit Program\n"
-							+ "\tEnter your selection: ");	
+							+ "7- Exit Program\n\n"
+							+ "\tEnter your selection: ");
 	}
 	
 	public static void main(String[] args) {
@@ -19,24 +18,56 @@ public class Project1 {
 		ArrayList<Student> students = new ArrayList<>();
 		ArrayList<Faculty> faculty = new ArrayList<>();
 		ArrayList<Staff> staff = new ArrayList<>();	
+
 		int choice;
 		final int numStudents = 2;
+		
+		System.out.println("\t\t\tWelcome to my Personal Management Program\n\n");
 		// Driver loop
 		do {
 			printMenu();
+			while (!in.hasNextInt()) {
+				in.nextLine();
+				System.out.println("\nInvalid entry - please try again.\n");
+				System.out.print("\tEnter your selection: ");
+			}
+				
 			choice = in.nextInt();
 			in.nextLine(); // To eat the newline character
+			System.out.println("\n"); // Formatting
+			
 			switch(choice) {
 				// Entering information for 2 students
 				case 1:
-					for (int i = 0; i < numStudents; ++i) {
-						System.out.println("Enter student " + (i + 1) + " info: ");
-						Student newStudent = new Student();
-						newStudent.initStudent(in);
-						students.add(newStudent);
-						System.out.println("Student added!");
+					// Record exists
+					if (!students.isEmpty()) {
+						System.out.print("You already have two students filled in. Do you want to update their information?\n"
+										 + "Yes or No: ");
+						String overwrite = in.nextLine();
+						if (overwrite.equalsIgnoreCase("Yes")) {
+							for (int i = 0; i < numStudents; ++i) {
+								System.out.println("Enter student " + (i + 1) + " info: \n");
+								Student newStudent = new Student();
+								newStudent.initStudent(in);
+								students.add(newStudent);
+								System.out.println("\nThanks!\n\n");
+							}
+							break;
+						}
+						break; // overwrite = "No" or something else
 					}
+					// No record
+					else
+						for (int i = 0; i < numStudents; ++i) {
+							System.out.println("Enter student " + (i + 1) + " info: \n");
+							Student newStudent = new Student();
+							newStudent.initStudent(in);
+							students.add(newStudent);
+							System.out.println("\nThanks!\n\n");
+						}
+						
 					break;
+					
 				// Generating invoice for 1 student
 				case 2:
 					System.out.print("Which student? Enter 1 for " 
@@ -49,20 +80,19 @@ public class Project1 {
 					break;
 				// Entering information for 1 faculty member
 				case 3:
-					System.out.println("Enter faculty info: ");
+					System.out.println("Enter faculty info:\n");
 					Faculty newFaculty = new Faculty();
 					newFaculty.initFaculty(in);
 					faculty.add(newFaculty);
-					System.out.println("Faculty member added!");
+					System.out.println("Faculty successfully added!");
 					break;
 				// Printing information for 1 faculty member
 				case 4:
-					System.out.println("Printing faculty member information...");
 					faculty.get(0).print();
 					break;
 				// Entering information for 1 staff member
 				case 5:
-					System.out.println("Enter staff info: ");
+					System.out.println("Enter staff info:\n");
 					Staff newStaff = new Staff();
 					newStaff.initStaff(in);
 					staff.add(newStaff);
@@ -70,7 +100,6 @@ public class Project1 {
 					break;
 				// Printing information for 1 staff member
 				case 6:
-					System.out.println("Printing staff member information");
 					staff.get(0).print();
 					break;
 				// Exiting the program
@@ -103,11 +132,11 @@ class User {
 	
 	// generic info for all
 	public void initBasicInfo(Scanner in) {
-		System.out.print("Name: ");
+		System.out.print("\tName: ");
 		String name = in.nextLine();
 		setName(name);
 		
-		System.out.print("ID: ");
+		System.out.print("\tID: ");
 		String id = in.nextLine();
 		setId(id);
 	}
@@ -146,12 +175,12 @@ class Student extends User {
 		int creditHours;
 		initBasicInfo(in);
 		
-		System.out.print("GPA: ");
+		System.out.print("\tGPA: ");
 		gpa = in.nextDouble();
 		in.nextLine(); // newline
 		setGpa(gpa);
 		
-		System.out.print("Credit Hours: ");
+		System.out.print("\tCredit Hours: ");
 		creditHours = in.nextInt();
 		in.nextLine(); // newline
 		setCreditHours(creditHours);		
@@ -165,15 +194,15 @@ class Student extends User {
 		double totalDiscount = 0;
 		
 		if (getGpa() >= 3.85) {
-			totalPayment = (creditHours * tuition) * (1 - discount);
-			totalDiscount = (creditHours * tuition) * discount;
+			totalPayment = ((creditHours * tuition) + fees) * (1 - discount);
+			totalDiscount = ((creditHours * tuition) + fees) * discount;
 		}
 		else
-			totalPayment = creditHours * tuition;
+			totalPayment = (creditHours * tuition) + fees;
 			
 		System.out.println("Here is the tuition invoice for " + getName() + " :\n"
 							+ "---------------------------------------------------------------------------\n"
-							+ getName() + "\t\t" + getId() + "\n"
+							+ getName() + "\t\t\t" + getId() + "\n"
 							+ "Credit Hours:" + getCreditHours() + " ($236.45/credit hour)\n"
 							+ "Fees: $" + fees + "\n\n"
 							+ "Total payment (after discount): $" + String.format("%.2f", totalPayment) + "\t\t($" + String.format("%.2f", totalDiscount) + " discount applied)\n"
@@ -212,15 +241,50 @@ class Faculty extends User {
 	public void initFaculty(Scanner in) {
 		String department;
 		String rank;
+		boolean dept;
+		
 		initBasicInfo(in);
 		
-		System.out.print("Department: ");
-		department = in.nextLine();
+		// Sadly, XOR is only a binary operator and not n-ary
+		do {
+			// Getting Department
+			System.out.print("\tDepartment: ");
+			department = in.nextLine();
+			
+			if (department.equalsIgnoreCase("mathematics")) {
+				dept = true;
+				department = "Mathematics";
+			}
+			else if (department.equalsIgnoreCase("engineering")) {
+				dept = true;
+				department = "Engineering";
+			}
+			else if (department.equalsIgnoreCase("english")) {
+				dept = true;
+				department = "English";
+			}
+			else {
+				System.out.println("\nInvalid department. Please try again.\n");
+				dept = false;
+			}
+		}while (!dept);
+		
 		setDepartment(department);
 		
-		System.out.print("Rank: ");
+		// Getting Rank
+		System.out.print("\tRank: ");
 		rank = in.nextLine();
-		setRank(rank);		
+		// "While not exactly one is true"
+		while (!(rank.equalsIgnoreCase("professor") ^ rank.equalsIgnoreCase("adjunct"))) {
+			System.out.println("\nInvalid rank. Please try again.\n");
+			System.out.print("\tRank: ");
+			rank = in.nextLine();
+		}
+		// "Exactly one must be true"
+		if (rank.equalsIgnoreCase("professor"))
+			setRank("Professor");
+		else
+			setRank("Adjunct");
 	}
 	
 	public String getDepartment() {
@@ -241,8 +305,8 @@ class Faculty extends User {
 	
 	// Outputs the faculty info
 	public void print() {
-		System.out.println("---------------------------------------------------------------------------"
-							+ getName() + "\t\t" + getId() + "\n"
+		System.out.println("---------------------------------------------------------------------------\n"
+							+ getName() + "\t\t" + getId() + "\n\n"
 							+ getDepartment() + " Department, " + getRank() + "\n"
 							+ "---------------------------------------------------------------------------\n");
 	}
@@ -263,15 +327,49 @@ class Staff extends User {
 	public void initStaff(Scanner in) {
 		String department;
 		String status;
+		boolean dept;
+		
 		initBasicInfo(in);
 		
-		System.out.print("Department: ");
-		department = in.nextLine();
+		do {
+			// Getting Department
+			System.out.print("\tDepartment: ");
+			department = in.nextLine();
+			
+			if (department.equalsIgnoreCase("mathematics")) {
+				dept = true;
+				department = "Mathematics";
+			}
+			else if (department.equalsIgnoreCase("engineering")) {
+				dept = true;
+				department = "Engineering";
+			}
+			else if (department.equalsIgnoreCase("english")) {
+				dept = true;
+				department = "English";
+			}
+			else {
+				System.out.println("\nInvalid department. Please try again.\n");
+				dept = false;
+			}
+		}while (!dept);
+		
 		setDepartment(department);
 		
-		System.out.print("Status: ");
+		// Getting Status
+		System.out.print("\tStatus, Enter P for Part Time or Enter F for Full Time: ");
 		status = in.nextLine();
-		setStatus(status);		
+		// "while not exactly one is true"
+		while (!(status.equalsIgnoreCase("p") ^ status.equalsIgnoreCase("f"))) {
+			System.out.println("\nInvalid status. Please try again.\n");
+			System.out.print("\tStatus, Enter P for Part Time or Enter F for Full Time: ");
+			status = in.nextLine();
+		}
+		// Exactly one must be true
+		if (status.equalsIgnoreCase("p"))
+			setStatus("Part-time");
+		else
+			setStatus("Full-time");
 	}
 	
 	public String getDepartment() {
@@ -292,8 +390,8 @@ class Staff extends User {
 	
 	// Outputs the staff info
 	public void print() {
-		System.out.println("---------------------------------------------------------------------------"
-							+ getName() + "\t\t" + getId() + "\n"
+		System.out.println("---------------------------------------------------------------------------\n"
+							+ getName() + "\t\t" + getId() + "\n\n"
 							+ getDepartment() + " Department, " + getStatus() + "\n"
 							+ "---------------------------------------------------------------------------\n");
 	}
