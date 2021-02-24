@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 // Child class
-class Faculty extends User {
+public class Faculty extends User {
 	// Instance variables
 	private String department;
 	private String rank;

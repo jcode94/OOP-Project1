@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 // Parent class
-class User {
+public class User {
 	// Instance variables
 	private String fullName;
 	private String id;

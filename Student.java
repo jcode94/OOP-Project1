@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 // Child class
-class Student extends User {
+public class Student extends User {
 	// Instance variables
 	private double gpa;
 	private int creditHours;
